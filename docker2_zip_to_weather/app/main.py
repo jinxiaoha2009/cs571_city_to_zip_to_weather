@@ -8,7 +8,7 @@ def read_root():
     return {"Hello": "World"}
 
 @app.get("/ziptoweather/{zipcode}")
-def get_zipcode(zipcode: str):
+async def get_zipcode(zipcode: str):
     if zipcode == "94085":
         return {"weather": "good"}
     elif zipcode == "94035":

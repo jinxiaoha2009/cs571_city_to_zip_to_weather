@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 import uvicorn
+import requests
 
 app = FastAPI()
 
@@ -8,14 +9,20 @@ def read_root():
     return {"Hello": "World"}
 
 @app.get("/city/{cityname}")
-def get_zipcode(cityname: str):
+async def get_zipcode(cityname: str):
+    zipcode = "00000"
     if cityname == "sunnyvale":
-        return {"zipcode": "94085"}
+        zipcode = "94085"
     elif cityname == "mtv":
-        return {"zipcode": "94035"}
-    
+        zipcode = "94035"
     else:
-        return {"zipcode": "unknown"}
+        zipcode = "00000"
+
+    url = f"http://10.0.0.46:8001/ziptoweather/{zipcode}"
+    response = requests.get(url)
+
+    return response.json()
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
