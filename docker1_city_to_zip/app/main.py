@@ -4,6 +4,8 @@ import requests
 
 app = FastAPI()
 
+IP_ADDRESS = "10.0.0.46"
+
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
@@ -18,9 +20,8 @@ async def get_zipcode(cityname: str):
     else:
         zipcode = "00000"
 
-    url = f"http://10.0.0.46:8001/ziptoweather/{zipcode}"
+    url = f"http://{IP_ADDRESS}:8001/ziptoweather/{zipcode}"
     response = requests.get(url)
-
     return response.json()
 
 
