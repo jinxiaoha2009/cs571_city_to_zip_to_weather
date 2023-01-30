@@ -15,7 +15,7 @@ async def get_zipcode(zipcode: str):
     elif zipcode == "94035":
         return {"weather": "bad"}
     else:
-        return {"zipcode": "unknown"}
+        return {"weather": "unknown"}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8001)
